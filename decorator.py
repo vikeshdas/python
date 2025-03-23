@@ -233,3 +233,41 @@ func()
 
 
 
+"""
+We have so far worked with decorating functions. This means we can decorate functions using '@' . Since class methods are functions, they can be decorated too. 
+
+A decorator for classes takes a class as input, modifies or extends its behavior, and returns a new class similar to decorator for  function
+"""
+
+from datetime import datetime, timezone
+
+def debug_info(cls):
+    def info(self):
+        results = []
+        results.append('time: {0}'.format(datetime.now(timezone.utc)))
+        results.append('class: {0}'.format(self.__class__.__name__))
+        results.append('id: {0}'.format(hex(id(self))))
+        
+        if vars(self):
+            for k, v in vars(self).items():
+                results.append('{0}: {1}'.format(k, v))
+        
+        
+        return results
+    
+    cls.debug = info
+    
+    return cls
+
+@debug_info
+class Person:
+    def __init__(self, first_name, last_name):
+        self.first_name = first_name
+        self.last_name = last_name
+        
+    def say_hi():
+        return 'say hi '
+    
+obj = Person('vikesh', "das")
+res=obj.debug()
+print(res)
