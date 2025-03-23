@@ -37,7 +37,7 @@ func(username="vikes8h",passward="1823")
 
 
 
-# Application of decoretor
+# Application of decorator
 
 """
     One application of decorator can be logger,define a logger decoretor which print inforation about funcion like excution date and time, function name.Then use that decorator with all funciton where you need same kind of logger.
@@ -135,6 +135,60 @@ def febonacci(n):
 
 
 print(febonacci(6))
+
+
+print("**********************************************************************")
+# decorator with parameter
+
+"""
+    lru_cache decorator is used for mamoization. can we send parameter in decorator while calling?. some built-in decorator of python like lru_cache(256) takes argument.as you can see below exmaple
+"""
+from functools import lru_cache
+import random
+"""
+@lru_cache(max_szie=256) this is actually function call not decorator .it is funciton call which creates decorator.there will be decorator defined in that funciton.
+"""
+@lru_cache(256)
+def func():
+    pass
+
+
+"""
+    below is custom(user defined) lru_cache lru_cache of functools is defined similarly.we used parameter to fix the max size of cache.in lru_cache we bsically remove least used key value if size of cache exceed limit.
+
+    below lruCache() funciton is called decorator factory which create  and  return decorator.
+"""
+def lruCache(max_size):
+    def decorator(func):
+        print("inside decorator")
+        cache={}
+        def inner(n):
+            print("inside inner")
+            if n in cache:
+                return cache[n]
+            
+            res=func(n)
+            cache[n]=res
+
+            if len(cache)>max_size:
+                # remove some key value
+                print("removing somekeys")
+                random_keys = random.sample(list(cache.keys()), 5)
+                for key in random_keys:
+                    cache.pop(key)
+            return res
+        return inner
+    return decorator 
+
+@decorator(max_size=10)
+def fibbonacci(n):
+    if n<=2:
+        return 1
+    return fibbonacci(n-1)+fibbonacci(n-2)
+
+
+
+print(fibbonacci(114))
 
 
 
