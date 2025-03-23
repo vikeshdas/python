@@ -191,4 +191,45 @@ def fibbonacci(n):
 print(fibbonacci(114))
 
 
+print("*********************************************************************")
+"""
+    Decorator using class
+"""
+
+class MyClass:
+    def __init__(self,a,b):
+        self.a=a
+        self.b=b
+
+    def __call__(self,c):
+        """
+            In Python, the __call__ method is a special method that allows an instance of a class to be called as a function.
+        """
+        print("called a={0} ,b={1}, c={2}".format(self.a,self.b,c))
+
+
+obj=MyClass(10,20)
+obj(30)
+
+"""
+    we can use __call__methos as a decorator
+"""
+class MyClass:
+    def __init__(self,a,b):
+        self.a=a
+        self.b=b
+
+    def __call__(self,func):
+        def inner(*args,**kwars):
+            print("inside inner")
+        return inner
+
+
+@MyClass(10,20)
+def func():
+    pass
+
+func()
+
+
 
