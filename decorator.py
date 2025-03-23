@@ -40,12 +40,13 @@ func(username="vikes8h",passward="1823")
 # Application of decorator
 
 """
-    One application of decorator can be logger,define a logger decoretor which print inforation about funcion like excution date and time, function name.Then use that decorator with all funciton where you need same kind of logger.
+    One application of decorators can be logging. Define a logger decorator that prints information about the function, such as the execution date and time, and the function name. Then, use that decorator with all functions where you need the same kind of logging.
 """
 
 def decorator(func):
     """
-        below libraries inside fuction because ,when lets say this docorator are in a module and using import we want to use in some other module that time we don't need to import externally in that model where we are using it .
+    The libraries below are placed inside the function because, let's say these decorators are in a module, and we want to use them in another module via import. In that case, we don't need to import them externally in the module where we are using them.
+
     """
     from functools import wraps
     from datetime import datetime,timezone
@@ -76,7 +77,7 @@ print("*"*20)
 
 
 """
-    what if we want to pass a function in mutiple decorator at same time ,what will be order of excution of decorator
+    what if we want to pass a function in multiple decorator at same time ,what will be order of excution of decorator
 """
 
 def decorator1(func):
@@ -94,7 +95,7 @@ def decorator2(func):
     return inner
     
 """
- so on funciton two decorator will be called ,very first decorator2 will be called and then decorator1. we can change the order based on our requirement.
+ so on function two decorator will be called ,very first decorator2 will be called and then decorator1. we can change the order based on our requirement.
 """
 @decorator2
 @decorator1
@@ -106,7 +107,7 @@ func()
 # Onother application of decorator
 
 """
-    calculate sum of n fibbonacci number using decorator and clouser.Do memoization because febonacci funciton call recurssivly again and again on same number.In below code used closur,as you can see dictionary for memoization
+    Calculate the sum of the first n Fibonacci numbers using a decorator and closure.Use memoization because the Fibonacci function calls itself recursively on the same numbers repeatedly.In the code below, a closure is used, and you can see a dictionary for memoization.
 """
 
 
@@ -154,9 +155,9 @@ def func():
 
 
 """
-    below is custom(user defined) lru_cache lru_cache of functools is defined similarly.we used parameter to fix the max size of cache.in lru_cache we bsically remove least used key value if size of cache exceed limit.
+Below is a custom (user-defined) lru_cache. The lru_cache from functools is defined similarly. We used a parameter to fix the maximum size of the cache. In lru_cache, we basically remove the least recently used key-value pair if the size of the cache exceeds the limit.
 
-    below lruCache() funciton is called decorator factory which create  and  return decorator.
+The lruCache() function below is called a decorator factory, which creates and returns a decorator.
 """
 def lruCache(max_size):
     def decorator(func):
@@ -212,7 +213,7 @@ obj=MyClass(10,20)
 obj(30)
 
 """
-    we can use __call__methos as a decorator
+    we can use __call__method as a decorator
 """
 class MyClass:
     def __init__(self,a,b):
@@ -234,9 +235,9 @@ func()
 
 
 """
-We have so far worked with decorating functions. This means we can decorate functions using '@' . Since class methods are functions, they can be decorated too. 
+So far, we have worked with decorating functions. This means we can decorate functions using the '@' symbol. Since class methods are essentially functions, they can also be decorated.
 
-A decorator for classes takes a class as input, modifies or extends its behavior, and returns a new class similar to decorator for  function
+A class decorator takes a class as input, modifies or extends its behavior, and returns a new class, similar to how a function decorator works.
 """
 
 from datetime import datetime, timezone
